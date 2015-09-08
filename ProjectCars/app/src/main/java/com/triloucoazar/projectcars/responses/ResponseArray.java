@@ -14,4 +14,8 @@ public class ResponseArray<T extends Serializable> implements Serializable {
 
     @SerializedName("data")
     private ArrayList<T> data;
+
+    public ArrayList<T> getData() {
+        return data;
+    }
 }

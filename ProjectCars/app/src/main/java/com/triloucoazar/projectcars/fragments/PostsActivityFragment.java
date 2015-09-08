@@ -1,24 +1,35 @@
 package com.triloucoazar.projectcars.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.triloucoazar.projectcars.R;
-import com.triloucoazar.projectcars.application.CarsApplication;
+import com.triloucoazar.projectcars.adapters.PostAdapter;
+import com.triloucoazar.projectcars.models.Post;
+import com.triloucoazar.projectcars.responses.ResponseArray;
 import com.triloucoazar.projectcars.services.PostService;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Response;
+
 public class PostsActivityFragment extends BaseFragment {
 
     @Inject
     PostService postService;
+
+    @Bind(R.id.posts_list_view)
+    ListView listView;
+
+    private PostAdapter postAdapter;
 
     public PostsActivityFragment() {
     }
@@ -26,14 +37,41 @@ public class PostsActivityFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_posts, container, false);
+
         injectionComponent().inject(this);
-        return inflater.inflate(R.layout.fragment_posts, container, false);
+        ButterKnife.bind(this, view);
+
+        initListView();
+
+        return view;
+    }
+
+    private void initListView() {
+        postAdapter = new PostAdapter(getActivity(), new ArrayList<Post>());
+        listView.setAdapter(postAdapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        postService.fetchAllPosts(new Callback<ResponseArray<Post>>() {
+            @Override
+            public void onResponse(Response<ResponseArray<Post>> response) {
+                postAdapter.clear();
+                postAdapter.addAll(response.body().getData());
+            }
 
-        postService.fetchAllPosts();
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+    }
+
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }
