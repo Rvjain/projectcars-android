@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.adapters.PostAdapter;
 import com.triloucoazar.projectcars.models.Post;
@@ -29,6 +30,9 @@ public class PostsActivityFragment extends BaseFragment {
     @Bind(R.id.posts_list_view)
     ListView listView;
 
+    @Bind(R.id.posts_fab)
+    FloatingActionButton fab;
+
     private PostAdapter postAdapter;
 
     public PostsActivityFragment() {
@@ -41,7 +45,7 @@ public class PostsActivityFragment extends BaseFragment {
 
         injectionComponent().inject(this);
         ButterKnife.bind(this, view);
-
+        fab.attachToListView(listView);
         initListView();
 
         return view;
