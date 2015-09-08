@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:fab="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".PostsActivityFragment">
+             xmlns:fab="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".PostsActivityFragment">
 
     <ListView
         android:id="@+id/posts_list_view"
@@ -14,14 +14,13 @@
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/posts_fab"
-        android:src="@drawable/ic_add_white_48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:src="@drawable/ic_add_white_48dp"
         fab:fab_colorNormal="@android:color/holo_blue_light"
         fab:fab_colorPressed="@android:color/holo_blue_dark"
         fab:fab_colorRipple="@android:color/holo_blue_bright"/>
-
 
 </FrameLayout>

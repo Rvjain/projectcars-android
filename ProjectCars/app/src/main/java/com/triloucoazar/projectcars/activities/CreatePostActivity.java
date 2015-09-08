@@ -7,11 +7,11 @@ import android.view.MenuItem;
 
 import com.triloucoazar.projectcars.R;
 
-public class PostsActivity extends ActionBarActivity {
+public class CreatePostActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posts);
+        setContentView(R.layout.activity_create_post);
     }
 }

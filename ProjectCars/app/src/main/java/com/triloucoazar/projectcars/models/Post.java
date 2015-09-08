@@ -13,6 +13,11 @@ public class Post implements Serializable {
     @SerializedName("message")
     private String message;
 
+    public Post(String carPlate, String message) {
+        this.carPlate = carPlate;
+        this.message = message;
+    }
+
     public String getCarPlate() {
         return carPlate;
     }

@@ -1,5 +1,6 @@
 package com.triloucoazar.projectcars.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.triloucoazar.projectcars.R;
+import com.triloucoazar.projectcars.activities.CreatePostActivity;
 import com.triloucoazar.projectcars.adapters.PostAdapter;
 import com.triloucoazar.projectcars.models.Post;
 import com.triloucoazar.projectcars.responses.ResponseArray;
@@ -19,10 +21,11 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.Response;
 
-public class PostsActivityFragment extends BaseFragment {
+public class PostsFragment extends BaseFragment {
 
     @Inject
     PostService postService;
@@ -35,13 +38,13 @@ public class PostsActivityFragment extends BaseFragment {
 
     private PostAdapter postAdapter;
 
-    public PostsActivityFragment() {
+    public PostsFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_posts, container, false);
+        View view = inflater.inflate(R.layout.fragment_posts, container, false);
 
         injectionComponent().inject(this);
         ButterKnife.bind(this, view);
@@ -73,9 +76,9 @@ public class PostsActivityFragment extends BaseFragment {
         });
     }
 
-
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    @OnClick(R.id.posts_fab)
+    public void createPost() {
+        Intent intent = new Intent(getActivity(), CreatePostActivity.class);
+        startActivity(intent);
     }
 }
