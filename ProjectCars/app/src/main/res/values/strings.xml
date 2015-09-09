@@ -3,4 +3,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_post">CreatePostActivity</string>
+    <string name="transition_create_post">post_create_transition</string>
 </resources>

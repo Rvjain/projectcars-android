@@ -2,6 +2,7 @@ package com.triloucoazar.projectcars.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class PostsFragment extends BaseFragment {
     @OnClick(R.id.posts_fab)
     public void createPost() {
         Intent intent = new Intent(getActivity(), CreatePostActivity.class);
-        startActivity(intent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), fab, getString(R.string.transition_create_post));
+        getActivity().startActivity(intent, options.toBundle());
     }
 }
