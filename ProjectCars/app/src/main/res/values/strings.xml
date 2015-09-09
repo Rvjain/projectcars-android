@@ -2,6 +2,9 @@
     <string name="app_name">ProjectCars</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">1639634559616890</string>
     <string name="title_activity_create_post">CreatePostActivity</string>
     <string name="transition_create_post">post_create_transition</string>
+    <string name="title_activity_facebook_login">FacebookLoginActivity</string>
+    <string name="login_fail">Não foi possível conectar com seu facebook</string>
 </resources>

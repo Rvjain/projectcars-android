@@ -2,12 +2,8 @@ package com.triloucoazar.projectcars.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
-import org.parceler.ParcelConstructor;
-
 import java.util.ArrayList;
 
-@Parcel
 public class ApiError {
     @SerializedName("error_code")
     private Integer code;
@@ -15,7 +11,6 @@ public class ApiError {
     @SerializedName("message")
     private ArrayList<String> messages;
 
-    @ParcelConstructor
     public ApiError(ArrayList<String> messages, int code) {
         this.messages = messages;
         this.code = code;
