@@ -1,5 +1,6 @@
 package com.triloucoazar.projectcars.services;
 
+import com.facebook.Profile;
 import com.triloucoazar.projectcars.application.CarsApplication;
 import com.triloucoazar.projectcars.interfaces.CarsApi;
 import com.triloucoazar.projectcars.models.Post;
@@ -23,8 +24,9 @@ public class PostService {
     }
 
     public void createPost(Post post, ApiCallback<Post> callback) {
-        post.setUserName("Android");
-        post.setUserId("YGOYGOYGO");
+        Profile profile = Profile.getCurrentProfile();
+        post.setUserName(profile.getName());
+        post.setUserId(profile.getId());
         api.createUser(post).enqueue(callback);
     }
 }
