@@ -1,6 +1,7 @@
 package com.triloucoazar.projectcars.services;
 
 import com.triloucoazar.projectcars.application.CarsApplication;
+import com.triloucoazar.projectcars.responses.ApiCallback;
 import com.triloucoazar.projectcars.interfaces.CarsApi;
 import com.triloucoazar.projectcars.models.Post;
 import com.triloucoazar.projectcars.responses.ApiResponse;
@@ -20,11 +21,11 @@ public class PostService {
         applicationContext.getApplicationComponent().inject(this);
     }
 
-    public void fetchAllPosts(Callback<ApiResponse<ArrayList<Post>>> callback) {
+    public void fetchAllPosts(ApiCallback<ArrayList<Post>> callback) {
         api.fetchAllPosts().enqueue(callback);
     }
 
-    public void createPost(String plate, String message, Callback<ApiResponse<Post>> callback) {
-        api.createUser(new Post(plate, message)).enqueue(callback);
+    public void createPost(Post post, Callback<ApiResponse<Post>> callback) {
+        api.createUser(post).enqueue(callback);
     }
 }

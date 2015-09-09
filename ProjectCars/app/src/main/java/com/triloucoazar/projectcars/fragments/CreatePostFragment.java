@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.models.Post;
+import com.triloucoazar.projectcars.responses.ApiCallback;
+import com.triloucoazar.projectcars.responses.ApiError;
 import com.triloucoazar.projectcars.responses.ApiResponse;
 import com.triloucoazar.projectcars.services.PostService;
 
@@ -40,15 +43,16 @@ public class CreatePostFragment extends BaseFragment {
 
     @OnClick(R.id.create_post_button)
     public void createPost() {
-        postService.createPost(plate.getText().toString(), message.getText().toString(), new Callback<ApiResponse<Post>>() {
+        Post post = new Post(plate.getText().toString(), message.getText().toString());
+        postService.createPost(post, new ApiCallback<Post>() {
             @Override
-            public void onResponse(retrofit.Response response) {
-                getActivity().finish();
+            public void failure(ApiError apiError) {
+                Toast.makeText(getActivity(), apiError.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Throwable t) {
-
+            public void success(Post data) {
+                getActivity().finish();
             }
         });
     }

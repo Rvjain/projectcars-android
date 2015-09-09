@@ -3,17 +3,20 @@ package com.triloucoazar.projectcars.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.activities.CreatePostActivity;
 import com.triloucoazar.projectcars.adapters.PostAdapter;
+import com.triloucoazar.projectcars.responses.ApiCallback;
+import com.triloucoazar.projectcars.responses.ApiError;
 import com.triloucoazar.projectcars.models.Post;
-import com.triloucoazar.projectcars.responses.ApiResponse;
 import com.triloucoazar.projectcars.services.PostService;
 
 import java.util.ArrayList;
@@ -23,8 +26,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit.Callback;
-import retrofit.Response;
 
 public class PostsFragment extends BaseFragment {
 
@@ -63,16 +64,17 @@ public class PostsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        postService.fetchAllPosts(new Callback<ApiResponse<ArrayList<Post>>>() {
+
+        postService.fetchAllPosts(new ApiCallback<ArrayList<Post>>() {
             @Override
-            public void onResponse(Response<ApiResponse<ArrayList<Post>>> response) {
-                postAdapter.clear();
-                postAdapter.addAll(response.body().getData());
+            public void failure(ApiError apiError) {
+                Toast.makeText(getActivity(), apiError.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Throwable t) {
-
+            public void success(ArrayList<Post> data) {
+                postAdapter.clear();
+                postAdapter.addAll(data);
             }
         });
     }
