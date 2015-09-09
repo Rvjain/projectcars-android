@@ -23,6 +23,9 @@ public class Post implements Serializable {
     @SerializedName("created_at")
     private Date createdAt;
 
+    @SerializedName("id")
+    private String postId;
+
     public Post(String carPlate, String message) {
         this.carPlate = carPlate;
         this.message = message;
