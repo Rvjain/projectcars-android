@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.melnykov.fab.FloatingActionButton;
 import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.activities.CreatePostActivity;
@@ -39,10 +40,10 @@ public class PostsFragment extends BaseFragment {
     @Bind(R.id.posts_fab)
     FloatingActionButton fab;
 
-    private PostAdapter postAdapter;
+    @Bind(R.id.posts_swipe_refresh)
+    PullRefreshLayout refreshLayout;
 
-    public PostsFragment() {
-    }
+    private PostAdapter postAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,29 +54,40 @@ public class PostsFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         fab.attachToListView(listView);
         initListView();
-
         return view;
     }
 
     private void initListView() {
         postAdapter = new PostAdapter(getActivity(), new ArrayList<Post>());
         listView.setAdapter(postAdapter);
+        initRefresh();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void initRefresh() {
+        refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
+        refreshList();
+    }
 
+    private void refreshList() {
+        refreshLayout.setRefreshing(true);
         postService.fetchAllPosts(new ApiCallback<ArrayList<Post>>() {
             @Override
             public void failure(ApiError apiError) {
                 Toast.makeText(getActivity(), apiError.toString(), Toast.LENGTH_LONG).show();
+                refreshLayout.setRefreshing(false);
             }
 
             @Override
             public void success(ArrayList<Post> data) {
                 postAdapter.clear();
                 postAdapter.addAll(data);
+                refreshLayout.setRefreshing(false);
             }
         });
     }

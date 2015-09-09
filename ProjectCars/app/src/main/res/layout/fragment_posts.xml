@@ -5,12 +5,20 @@
              android:layout_height="match_parent"
              tools:context=".PostsActivityFragment">
 
-    <ListView
-        android:id="@+id/posts_list_view"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/posts_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1dp"
-        android:listSelector="@android:color/transparent"/>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/posts_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent"/>
+
+    </com.baoyz.widget.PullRefreshLayout>
+
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/posts_fab"
