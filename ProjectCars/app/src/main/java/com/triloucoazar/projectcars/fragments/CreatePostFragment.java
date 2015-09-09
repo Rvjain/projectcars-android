@@ -11,7 +11,6 @@ import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.models.Post;
 import com.triloucoazar.projectcars.responses.ApiCallback;
 import com.triloucoazar.projectcars.responses.ApiError;
-import com.triloucoazar.projectcars.responses.ApiResponse;
 import com.triloucoazar.projectcars.services.PostService;
 
 import javax.inject.Inject;
@@ -19,7 +18,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit.Callback;
 
 public class CreatePostFragment extends BaseFragment {
 

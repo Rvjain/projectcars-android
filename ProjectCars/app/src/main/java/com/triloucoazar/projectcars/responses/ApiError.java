@@ -21,6 +21,13 @@ public class ApiError {
         this.code = code;
     }
 
+    public ApiError(String message, int code) {
+        ArrayList<String> messages = new ArrayList<>();
+        messages.add(message);
+        this.messages = messages;
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return messages.toString();

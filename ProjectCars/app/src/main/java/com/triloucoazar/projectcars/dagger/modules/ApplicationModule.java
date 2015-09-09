@@ -45,9 +45,13 @@ public class ApplicationModule {
     @Provides
     @Singleton
     CarsApi provideCarsApi() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.10:8080")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         return retrofit.create(CarsApi.class);
