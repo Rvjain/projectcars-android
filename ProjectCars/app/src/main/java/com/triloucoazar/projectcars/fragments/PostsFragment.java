@@ -13,7 +13,7 @@ import com.triloucoazar.projectcars.R;
 import com.triloucoazar.projectcars.activities.CreatePostActivity;
 import com.triloucoazar.projectcars.adapters.PostAdapter;
 import com.triloucoazar.projectcars.models.Post;
-import com.triloucoazar.projectcars.responses.ResponseArray;
+import com.triloucoazar.projectcars.responses.ApiResponse;
 import com.triloucoazar.projectcars.services.PostService;
 
 import java.util.ArrayList;
@@ -63,9 +63,9 @@ public class PostsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        postService.fetchAllPosts(new Callback<ResponseArray<Post>>() {
+        postService.fetchAllPosts(new Callback<ApiResponse<ArrayList<Post>>>() {
             @Override
-            public void onResponse(Response<ResponseArray<Post>> response) {
+            public void onResponse(Response<ApiResponse<ArrayList<Post>>> response) {
                 postAdapter.clear();
                 postAdapter.addAll(response.body().getData());
             }

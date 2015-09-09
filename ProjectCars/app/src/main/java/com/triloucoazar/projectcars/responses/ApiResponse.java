@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ResponseObject<T extends Serializable> implements Serializable {
+public class ApiResponse<T extends Serializable> implements Serializable {
     @SerializedName("error_code")
     private int errorCode;
 
