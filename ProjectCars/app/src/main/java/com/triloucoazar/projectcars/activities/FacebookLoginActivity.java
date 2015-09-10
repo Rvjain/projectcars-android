@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.facebook.Profile;
+import com.facebook.AccessToken;
 import com.triloucoazar.projectcars.R;
 
 public class FacebookLoginActivity extends FragmentActivity {
@@ -12,7 +12,7 @@ public class FacebookLoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Profile.getCurrentProfile() != null) {
+        if (AccessToken.getCurrentAccessToken() != null) {
             navigateToHome();
         } else {
             setContentView(R.layout.activity_facebook_login);

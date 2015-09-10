@@ -46,4 +46,12 @@ public class Post implements Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
 }
