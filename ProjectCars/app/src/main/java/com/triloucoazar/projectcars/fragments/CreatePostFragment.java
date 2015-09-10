@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.triloucoazar.projectcars.R;
+import com.triloucoazar.projectcars.analytics.Analytics;
 import com.triloucoazar.projectcars.models.Post;
 import com.triloucoazar.projectcars.responses.ApiCallback;
 import com.triloucoazar.projectcars.responses.ApiError;
@@ -50,6 +51,7 @@ public class CreatePostFragment extends BaseFragment {
 
             @Override
             public void success(Post data) {
+                Analytics.trackPostCreation(data);
                 getActivity().finish();
             }
         });

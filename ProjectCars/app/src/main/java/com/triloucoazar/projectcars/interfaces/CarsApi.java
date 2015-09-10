@@ -12,9 +12,9 @@ import retrofit.http.POST;
 
 public interface CarsApi {
 
-    @GET("/posts/list")
+    @GET("/posts")
     Call<ApiResponse<ArrayList<Post>>>fetchAllPosts();
 
-    @POST("/posts/create")
+    @POST("/posts")
     Call<ApiResponse<Post>> createUser(@Body Post post);
 }
